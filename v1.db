@@ -1,0 +1,30 @@
+Table Student {
+  matricule integer [primary key]
+  nom varchar
+  prenom varchar
+  mail varchar
+  natel varchar
+}
+
+Table Cours {
+  id_cours integer [primary key]
+  nom varchar
+}
+
+Table Student_cours {
+  id_student integer
+  id_cours integer
+}
+
+Ref: Student.matricule > Student_cours.id_student
+Ref : Cours.id_cours > Student_cours.id_cours
+
+Table Professeur {
+  id_professeur integer [primary key]
+  nom varchar
+  prenom varchar
+  bureau integer 
+  mail varchar
+}
+
+Ref: Cours.id_cours > Professeur.id_professeur
