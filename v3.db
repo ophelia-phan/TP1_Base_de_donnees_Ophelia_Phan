@@ -1,0 +1,57 @@
+Table Student {
+  matricule int [primary key]
+  nom varchar
+  prenom varchar
+  mail varchar
+  natel varchar
+  is_assistant boolean // True si l'élève est assistant sinon false
+}
+
+Table Cours {
+  id_cours int [primary key]
+  nom varchar
+  id_professeur int
+}
+
+Table Student_cours {
+  id_student int
+  id_cours int
+}
+
+Ref: Student.matricule > Student_cours.id_student
+Ref : Cours.id_cours > Student_cours.id_cours
+
+Table Professeur {
+  id_professeur int [primary key]
+  nom varchar
+  prenom varchar
+  bureau int 
+  mail varchar
+}
+
+Ref: Cours.id_professeur > Professeur.id_professeur
+
+Table Note {
+  id_note int [primary key]
+  date_evaluation date
+  grade int
+  coefficient int
+  id_cours int
+  id_student int
+}
+
+Ref: Note.id_cours > Cours.id_cours
+Ref: Note.id_student > Student.matricule
+
+Table Assistant{
+  id_assistant int
+  id_subject int
+  bureau int
+  is_assistant_check boolean 
+
+  Note: 'only if is_assistant = true' 
+
+}
+
+Ref: Assistant.id_assistant - Student.matricule
+Ref: Assistant.id_subject > Cours.id_cours
