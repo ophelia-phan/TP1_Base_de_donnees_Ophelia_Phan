@@ -1,5 +1,5 @@
 Table Student {
-  matricule integer [primary key]
+  matricule int [primary key]
   nom varchar
   prenom varchar
   mail varchar
@@ -7,35 +7,36 @@ Table Student {
 }
 
 Table Cours {
-  id_cours integer [primary key]
+  id_cours int [primary key]
   nom varchar
+  id_professeur int
 }
 
 Table Student_cours {
-  id_student integer
-  id_cours integer
+  id_student int
+  id_cours int
 }
 
 Ref: Student.matricule > Student_cours.id_student
 Ref : Cours.id_cours > Student_cours.id_cours
 
 Table Professeur {
-  id_professeur integer [primary key]
+  id_professeur int [primary key]
   nom varchar
   prenom varchar
-  bureau integer 
+  bureau int 
   mail varchar
 }
 
-Ref: Cours.id_cours > Professeur.id_professeur
+Ref: Cours.id_professeur > Professeur.id_professeur
 
 Table Note {
-  id_note integer [primary key]
-  date_evaluation timestamp
-  grade integer
-  coefficient integer
-  id_cours integer
-  id_student integer
+  id_note int [primary key]
+  date_evaluation date
+  grade int
+  coefficient int
+  id_cours int
+  id_student int
 }
 
 Ref: Note.id_cours > Cours.id_cours
