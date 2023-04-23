@@ -1,20 +1,20 @@
 Table Student {
   matricule int [primary key]
-  nom varchar
-  prenom varchar
-  mail varchar
+  nom varchar [not null]
+  prenom varchar [not null]
+  mail varchar [unique, not null]
   natel varchar
 }
 
 Table Cours {
   id_cours int [primary key]
-  nom varchar
-  id_professeur int
+  nom varchar [not null]
+  id_professeur int [not null]
 }
 
 Table Student_cours {
-  id_student int
-  id_cours int
+  id_student int [not null]
+  id_cours int [not null]
 }
 
 Ref: Student.matricule > Student_cours.id_student
@@ -22,10 +22,10 @@ Ref : Cours.id_cours > Student_cours.id_cours
 
 Table Professeur {
   id_professeur int [primary key]
-  nom varchar
-  prenom varchar
-  bureau int 
-  mail varchar
+  nom varchar [not null]
+  prenom varchar [not null]
+  bureau int [not null]
+  mail varchar [unique, not null]
 }
 
 Ref: Cours.id_professeur > Professeur.id_professeur
