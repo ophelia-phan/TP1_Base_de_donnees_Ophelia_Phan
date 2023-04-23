@@ -1,21 +1,21 @@
 Table Student {
   matricule int [primary key]
-  nom varchar
-  prenom varchar
-  mail varchar
+  nom varchar [not null]
+  prenom varchar [not null]
+  mail varchar [not null]
   natel varchar
-  is_assistant boolean // True si l'élève est assistant sinon false
+  is_assistant boolean default [not null, default: false] // True si l'élève est assistant sinon false
 }
 
 Table Cours {
   id_cours int [primary key]
-  nom varchar
-  id_professeur int
+  nom varchar [not null]
+  id_professeur int [not null]
 }
 
 Table Student_cours {
-  id_student int
-  id_cours int
+  id_student int [not null]
+  id_cours int [not null]
 }
 
 Ref: Student.matricule > Student_cours.id_student
@@ -23,34 +23,33 @@ Ref : Cours.id_cours > Student_cours.id_cours
 
 Table Professeur {
   id_professeur int [primary key]
-  nom varchar
-  prenom varchar
-  bureau int 
-  mail varchar
+  nom varchar [not null]
+  prenom varchar [not null]
+  bureau int [not null]
+  mail varchar [not null]
 }
 
 Ref: Cours.id_professeur > Professeur.id_professeur
 
 Table Note {
   id_note int [primary key]
-  date_evaluation date
-  grade int
-  coefficient int
-  id_cours int
-  id_student int
+  date_evaluation date [not null]
+  grade int [not null]
+  coefficient int [not null]
+  id_cours int [not null]
+  id_student int [not null]
 }
 
 Ref: Note.id_cours > Cours.id_cours
 Ref: Note.id_student > Student.matricule
 
 Table Assistant{
-  id_assistant int
-  id_subject int
-  bureau int
-  is_assistant_check boolean 
+  id_assistant int [not null]
+  id_subject int [not null]
+  bureau int [not null]
+  is_assistant_check boolean [not null] // En SQL : Is_assistant_check boolean NOT NULL CHECK (IS_ASSSISTANT_CHECK=TRUE)
 
-  Note: 'only if is_assistant = true' 
-
+  Note: 'this table is created only if is_assistant_check = true' 
 }
 
 Ref: Assistant.id_assistant - Student.matricule
